@@ -1,33 +1,44 @@
 import fractions
 
-n = int(input("Ingrese el número de parejas ordenadas: " )) - 1 # Se ingresa la cantidad de n intervalos que se poseen
-b = float(input("Último límite de integración: " ))  # Se ingresa el número del último límite de integración (eje x normalmente)
-a = float(input("Primer límite de integración: " ))  # Se ingresa el númerl del primer límite de integración (eje x normalmente)
-delta_x = (b-a)/n  # Se cálcula delta de x
-diccionario = {}  # En este diccionario van a estar todas las parejas ordenadas
-Resultado = 0  # Se asigna un resultado con una variable para poder manipular a futuro
+n = int(input("Ingrese el número de parejas ordenadas: " )) - 1 # n range of couples
+b = float(input("Último límite de integración: " ))  # Last integration limit
+a = float(input("Primer límite de integración: " ))  # First integration limite
+delta_x = (b-a)/n  # Get Delta x
+diccionario = {}  # Dictionary where all the couples are.
+Resultado = 0  # Set variable equal to 0 to manipulate in the future
 
-for i in range(n+1):  # Se pide que se repita la acción de pedir datos n número de veces
-    x = input("Valor x de la pareja ordenada: " ) # Se pide la coordenada x
-    try:     #Verificación del x para ver si es una fracción o no
+for i in range(n+1): 
+"""Captures all the couples and add them in the dictionary"""
+    x = input("Valor x de la pareja ordenada: " ) # Get x axis
+    try:     # See if x is a fraction
         if not x.isnumeric():
             x = fractions.Fraction(x)
     except ValueError:
         (x + "NO SE ENCUENTRA EN EL DOMINIO")
     doubleofx = float(x) 
-    y = input("Valor y de la pareja ordenada: " ) # Se pide la coordenada y
-    try:    #Verificación del y para ver si es una fracción o no
+    y = input("Valor y de la pareja ordenada: " ) # Get y axis
+    try:    # See if y is a fraction
         if not y.isnumeric():
             y = fractions.Fraction(y)
     except ValueError:
         (y + "NO ES UN NÚMERO")
     doubleofy = float(y) 
-    diccionario.update({doubleofx:doubleofy}) # x and y se almacenan en el diccionario
+    diccionario.update({doubleofx:doubleofy}) # x and y get updated in the dictionary
 
-#OPERACIÓN PARA LA REGLA DEL TRAPECIO
+#Sum all the values and print the result of the integral
 diccionario.pop(b)
 for i in diccionario.values():
     Resultado += i
 
 Resultado *= delta_x
 print(Resultado)
+
+"""
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣶⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣦⣄⣀⡀⣠⣾⡇⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⢿⣿⣿⡇⠀⠀⠀⠀
+⠀⣶⣿⣦⣜⣿⣿⣿⡟⠻⣿⣿⣿⣿⣿⣿⣿⡿⢿⡏⣴⣺⣦⣙⣿⣷⣄⠀⠀⠀
+⠀⣯⡇⣻⣿⣿⣿⣿⣷⣾⣿⣬⣥⣭⣽⣿⣿⣧⣼⡇⣯⣇⣹⣿⣿⣿⣿⣧⠀⠀
+⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠸⣿⣿⣿⣿⣿⣿⣿⣷⠀
+"""
